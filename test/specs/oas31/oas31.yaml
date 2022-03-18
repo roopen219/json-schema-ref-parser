@@ -1,0 +1,14 @@
+title: Person
+type: object
+required:
+  - name
+properties:
+  name:
+    $ref: "#/definitions/name"
+  secretName:
+    $ref: "#/definitions/name"
+    description: "Someone's secret name"
+definitions:
+  name:
+    description: "Someone's name"
+    type: string
