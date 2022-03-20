@@ -1,25 +1,20 @@
-"use strict";
-
-module.exports =
-{
-  required: [
-    "name"
-  ],
-  type: "object",
+module.exports = {
+  required: ['name'],
+  type: 'object',
   definitions: {
     name: {
-      type: "string",
-      description: "Someone's name"
-    }
-  },
-  "properties": {
-    "name": {
-      "$ref": "#/definitions/name"
+      type: 'string',
+      description: "Someone's name",
     },
-    "secretName": {
-      "$ref": "#/definitions/name",
-      "description": "Someone's secret name"
-    }
   },
-  title: "Person"
+  properties: {
+    name: {
+      $ref: '#/definitions/name',
+    },
+    secretName: {
+      $ref: '#/definitions/name',
+      description: "Someone's secret name",
+    },
+  },
+  title: 'Person',
 };

@@ -1,104 +1,90 @@
-"use strict";
-
-module.exports =
-{
+module.exports = {
   definitions: {
     fragment: {
-      $id: "#fragment"
+      $id: '#fragment',
     },
     requiredString: {
-      title: "requiredString",
+      title: 'requiredString',
       minLength: 1,
-      type: "string"
+      type: 'string',
     },
     name: {
-      required: [
-        "first",
-        "last"
-      ],
-      type: "object",
+      required: ['first', 'last'],
+      type: 'object',
       properties: {
         first: {
-          title: "requiredString",
-          type: "string",
-          minLength: 1
+          title: 'requiredString',
+          type: 'string',
+          minLength: 1,
         },
         last: {
-          title: "requiredString",
-          type: "string",
-          minLength: 1
+          title: 'requiredString',
+          type: 'string',
+          minLength: 1,
         },
         middle: {
-          type: "string",
-          minLength: 1
+          type: 'string',
+          minLength: 1,
         },
         prefix: {
-          title: "requiredString",
-          type: "string",
-          minLength: 3
+          title: 'requiredString',
+          type: 'string',
+          minLength: 3,
         },
         suffix: {
-          title: "requiredString",
-          type: "string",
+          title: 'requiredString',
+          type: 'string',
           minLength: 3,
-          maxLength: 3
-        }
-      }
-    }
+          maxLength: 3,
+        },
+      },
+    },
   },
-  required: [
-    "name"
-  ],
-  type: "object",
+  required: ['name'],
+  type: 'object',
   properties: {
     fragment: {
-      $ref: "#fragment"
+      $ref: '#fragment',
     },
     gender: {
-      enum: [
-        "male",
-        "female"
-      ],
-      type: "string"
+      enum: ['male', 'female'],
+      type: 'string',
     },
     age: {
       minimum: 0,
-      type: "integer"
+      type: 'integer',
     },
     name: {
-      required: [
-        "first",
-        "last"
-      ],
-      type: "object",
+      required: ['first', 'last'],
+      type: 'object',
       properties: {
         first: {
-          title: "requiredString",
-          type: "string",
-          minLength: 1
+          title: 'requiredString',
+          type: 'string',
+          minLength: 1,
         },
         last: {
-          title: "requiredString",
-          type: "string",
-          minLength: 1
+          title: 'requiredString',
+          type: 'string',
+          minLength: 1,
         },
         middle: {
-          type: "string",
-          minLength: 1
+          type: 'string',
+          minLength: 1,
         },
         prefix: {
-          title: "requiredString",
-          type: "string",
-          minLength: 3
+          title: 'requiredString',
+          type: 'string',
+          minLength: 3,
         },
         suffix: {
-          title: "requiredString",
-          type: "string",
+          title: 'requiredString',
+          type: 'string',
           minLength: 3,
-          maxLength: 3
-        }
-      }
-    }
+          maxLength: 3,
+        },
+      },
+    },
   },
-  title: "Person"
+  title: 'Person',
 };

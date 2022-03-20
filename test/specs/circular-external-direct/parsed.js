@@ -1,8 +1,5 @@
-"use strict";
-
-module.exports =
-{
+module.exports = {
   schema: {
-    $ref: "./circular-external-direct-child.yaml#/foo",
+    $ref: './circular-external-direct-child.yaml#/foo',
   },
 };

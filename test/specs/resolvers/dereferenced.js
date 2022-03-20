@@ -1,85 +1,66 @@
-"use strict";
-
-module.exports =
-{
+module.exports = {
   definitions: {
     foo: {
       bar: {
-        baz: "hello world"
-      }
+        baz: 'hello world',
+      },
     },
     name: {
-      required: [
-        "first",
-        "last"
-      ],
-      type: "object",
+      required: ['first', 'last'],
+      type: 'object',
       properties: {
         last: {
           minLength: 1,
-          type: "string"
+          type: 'string',
         },
         first: {
           minLength: 1,
-          type: "string"
-        }
-      }
+          type: 'string',
+        },
+      },
     },
     pet: {
-      type: "object",
+      type: 'object',
       properties: {
         age: {
-          type: "number"
+          type: 'number',
         },
         name: {
-          type: "string"
+          type: 'string',
         },
         species: {
-          enum: [
-            "cat",
-            "dog",
-            "bird",
-            "fish"
-          ],
-          type: "string"
-        }
+          enum: ['cat', 'dog', 'bird', 'fish'],
+          type: 'string',
+        },
       },
-      title: "pet"
-    }
+      title: 'pet',
+    },
   },
-  required: [
-    "name"
-  ],
-  type: "object",
+  required: ['name'],
+  type: 'object',
   properties: {
     gender: {
-      enum: [
-        "male",
-        "female"
-      ],
-      type: "string"
+      enum: ['male', 'female'],
+      type: 'string',
     },
     age: {
       minimum: 0,
-      type: "integer"
+      type: 'integer',
     },
     name: {
-      required: [
-        "first",
-        "last"
-      ],
-      type: "object",
+      required: ['first', 'last'],
+      type: 'object',
       properties: {
         last: {
           minLength: 1,
-          type: "string"
+          type: 'string',
         },
         first: {
           minLength: 1,
-          type: "string"
-        }
-      }
-    }
+          type: 'string',
+        },
+      },
+    },
   },
-  title: "Person"
+  title: 'Person',
 };

@@ -1,9 +1,16 @@
-# ESLint config
-# http://eslint.org/docs/user-guide/configuring
-# https://jstools.dev/eslint-config/
-
 root: true
-extends: "@jsdevtools"
+extends:
+  - "@readme/eslint-config"
+  - "@readme/eslint-config/testing-mocha"
 env:
   node: true
   browser: true
+rules:
+  consistent-return: off
+  no-plusplus: off
+  no-restricted-syntax: off
+  no-underscore-dangle: off
+  no-unused-vars: off
+  no-use-before-define: off
+  node/no-deprecated-api: off # `url.parse` has been deprecated but `url.URL` isn't a good replacement yet.
+  prefer-rest-params: off

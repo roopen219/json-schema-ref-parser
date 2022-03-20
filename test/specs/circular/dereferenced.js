@@ -1,359 +1,316 @@
-"use strict";
-
-const dereferencedSchema = module.exports =
-{
+const dereferencedSchema = {
   self: {
     definitions: {
       pet: {
-        type: "object",
+        type: 'object',
         properties: {
           age: {
-            type: "number"
+            type: 'number',
           },
           name: {
-            type: "string"
+            type: 'string',
           },
           species: {
-            enum: [
-              "cat",
-              "dog",
-              "bird",
-              "fish"
-            ],
-            type: "string"
-          }
+            enum: ['cat', 'dog', 'bird', 'fish'],
+            type: 'string',
+          },
         },
-        title: "pet"
+        title: 'pet',
       },
       thing: {
-        $ref: "#/definitions/thing"
+        $ref: '#/definitions/thing',
       },
       child: {
-        type: "object",
+        type: 'object',
         properties: {
           pet: {
-            type: "object",
+            type: 'object',
             properties: {
               age: {
-                type: "number"
+                type: 'number',
               },
               name: {
-                type: "string"
+                type: 'string',
               },
               species: {
-                enum: [
-                  "cat",
-                  "dog",
-                  "bird",
-                  "fish"
-                ],
-                type: "string"
-              }
+                enum: ['cat', 'dog', 'bird', 'fish'],
+                type: 'string',
+              },
             },
-            title: "pet"
+            title: 'pet',
           },
           name: {
-            type: "string"
-          }
+            type: 'string',
+          },
         },
-        title: "child"
-      }
-    }
+        title: 'child',
+      },
+    },
   },
 
   ancestor: {
     fullyDereferenced: {
       definitions: {
         person: {
-          title: "person",
+          title: 'person',
           properties: {
             spouse: null,
             pet: null,
             name: {
-              type: "string"
+              type: 'string',
             },
             age: {
-              type: "number"
-            }
-          }
+              type: 'number',
+            },
+          },
         },
         pet: {
-          type: "object",
+          type: 'object',
           properties: {
             age: {
-              type: "number"
+              type: 'number',
             },
             name: {
-              type: "string"
+              type: 'string',
             },
             species: {
-              enum: [
-                "cat",
-                "dog",
-                "bird",
-                "fish"
-              ],
-              type: "string"
-            }
+              enum: ['cat', 'dog', 'bird', 'fish'],
+              type: 'string',
+            },
           },
-          title: "pet"
-        }
-      }
+          title: 'pet',
+        },
+      },
     },
 
     ignoreCircular$Refs: {
       definitions: {
         person: {
-          title: "person",
+          title: 'person',
           properties: {
             spouse: {
-              $ref: "#/definitions/person"
+              $ref: '#/definitions/person',
             },
             pet: null,
             name: {
-              type: "string"
+              type: 'string',
             },
             age: {
-              type: "number"
-            }
-          }
+              type: 'number',
+            },
+          },
         },
         pet: {
-          type: "object",
+          type: 'object',
           properties: {
             age: {
-              type: "number"
+              type: 'number',
             },
             name: {
-              type: "string"
+              type: 'string',
             },
             species: {
-              enum: [
-                "cat",
-                "dog",
-                "bird",
-                "fish"
-              ],
-              type: "string"
-            }
+              enum: ['cat', 'dog', 'bird', 'fish'],
+              type: 'string',
+            },
           },
-          title: "pet"
-        }
-      }
-    }
+          title: 'pet',
+        },
+      },
+    },
   },
 
   indirect: {
     fullyDereferenced: {
       definitions: {
         parent: {
-          title: "parent",
+          title: 'parent',
           properties: {
             name: {
-              type: "string"
+              type: 'string',
             },
             children: {
               items: null,
-              type: "array"
-            }
-          }
+              type: 'array',
+            },
+          },
         },
         child: {
-          title: "child",
+          title: 'child',
           properties: {
             parents: {
               items: null,
-              type: "array"
+              type: 'array',
             },
             pet: null,
             name: {
-              type: "string"
-            }
-          }
+              type: 'string',
+            },
+          },
         },
         pet: {
-          type: "object",
+          type: 'object',
           properties: {
             age: {
-              type: "number"
+              type: 'number',
             },
             name: {
-              type: "string"
+              type: 'string',
             },
             species: {
-              enum: [
-                "cat",
-                "dog",
-                "bird",
-                "fish"
-              ],
-              type: "string"
-            }
+              enum: ['cat', 'dog', 'bird', 'fish'],
+              type: 'string',
+            },
           },
-          title: "pet"
-        }
-      }
+          title: 'pet',
+        },
+      },
     },
 
     ignoreCircular$Refs: {
       definitions: {
         parent: {
-          title: "parent",
+          title: 'parent',
           properties: {
             name: {
-              type: "string"
+              type: 'string',
             },
             children: {
               items: {
-                $ref: "#/definitions/child"
+                $ref: '#/definitions/child',
               },
-              type: "array"
-            }
-          }
+              type: 'array',
+            },
+          },
         },
         child: {
-          title: "child",
+          title: 'child',
           properties: {
             parents: {
               items: {
-                $ref: "#/definitions/parent"
+                $ref: '#/definitions/parent',
               },
-              type: "array"
+              type: 'array',
             },
             pet: null,
             name: {
-              type: "string"
-            }
-          }
+              type: 'string',
+            },
+          },
         },
         pet: {
-          type: "object",
+          type: 'object',
           properties: {
             age: {
-              type: "number"
+              type: 'number',
             },
             name: {
-              type: "string"
+              type: 'string',
             },
             species: {
-              enum: [
-                "cat",
-                "dog",
-                "bird",
-                "fish"
-              ],
-              type: "string"
-            }
+              enum: ['cat', 'dog', 'bird', 'fish'],
+              type: 'string',
+            },
           },
-          title: "pet"
-        }
-      }
-    }
+          title: 'pet',
+        },
+      },
+    },
   },
 
   indirectAncestor: {
     fullyDereferenced: {
       definitions: {
         parent: {
-          title: "parent",
+          title: 'parent',
           properties: {
             name: {
-              type: "string"
+              type: 'string',
             },
-            child: null
+            child: null,
           },
         },
         child: {
-          title: "child",
+          title: 'child',
           properties: {
             name: {
-              type: "string"
+              type: 'string',
             },
             pet: null,
             children: {
               items: null,
-              type: "array",
-              description: "children"
-            }
+              type: 'array',
+              description: 'children',
+            },
           },
         },
         pet: {
-          type: "object",
+          type: 'object',
           properties: {
             age: {
-              type: "number"
+              type: 'number',
             },
             name: {
-              type: "string"
+              type: 'string',
             },
             species: {
-              enum: [
-                "cat",
-                "dog",
-                "bird",
-                "fish"
-              ],
-              type: "string"
-            }
+              enum: ['cat', 'dog', 'bird', 'fish'],
+              type: 'string',
+            },
           },
-          title: "pet"
-        }
-      }
+          title: 'pet',
+        },
+      },
     },
 
     ignoreCircular$Refs: {
       definitions: {
         parent: {
-          title: "parent",
+          title: 'parent',
           properties: {
             name: {
-              type: "string"
+              type: 'string',
             },
             child: {
-              $ref: "#/definitions/child"
-            }
+              $ref: '#/definitions/child',
+            },
           },
         },
         child: {
-          title: "child",
+          title: 'child',
           properties: {
             name: {
-              type: "string"
+              type: 'string',
             },
             pet: null,
             children: {
               items: {
-                $ref: "#/definitions/child"
+                $ref: '#/definitions/child',
               },
-              type: "array",
-              description: "children"
-            }
+              type: 'array',
+              description: 'children',
+            },
           },
         },
         pet: {
-          type: "object",
+          type: 'object',
           properties: {
             age: {
-              type: "number"
+              type: 'number',
             },
             name: {
-              type: "string"
+              type: 'string',
             },
             species: {
-              enum: [
-                "cat",
-                "dog",
-                "bird",
-                "fish"
-              ],
-              type: "string"
-            }
+              enum: ['cat', 'dog', 'bird', 'fish'],
+              type: 'string',
+            },
           },
-          title: "pet"
-        }
-      }
-    }
-  }
+          title: 'pet',
+        },
+      },
+    },
+  },
 };
 
 dereferencedSchema.ancestor.fullyDereferenced.definitions.person.properties.spouse =
@@ -388,3 +345,5 @@ dereferencedSchema.indirectAncestor.fullyDereferenced.definitions.child.properti
 
 dereferencedSchema.indirectAncestor.ignoreCircular$Refs.definitions.child.properties.pet =
   dereferencedSchema.indirectAncestor.ignoreCircular$Refs.definitions.pet;
+
+module.exports = dereferencedSchema;

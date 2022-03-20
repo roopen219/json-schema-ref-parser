@@ -1,35 +1,32 @@
-"use strict";
-
-module.exports =
-{
+module.exports = {
   internal1: {
     test: {
-      type: "string"
-    }
+      type: 'string',
+    },
   },
   internal2: {
     test: {
-      type: "string"
-    }
+      type: 'string',
+    },
   },
   internal3: {
     test: {
-      type: "string"
-    }
+      type: 'string',
+    },
   },
   internal4: {
     test: {
-      type: "string"
-    }
+      type: 'string',
+    },
   },
   external1: {
     test: {
-      type: "string"
-    }
+      type: 'string',
+    },
   },
   external2: {
     test: {
-      type: "string"
-    }
-  }
+      type: 'string',
+    },
+  },
 };
