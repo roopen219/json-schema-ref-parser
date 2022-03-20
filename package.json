@@ -41,8 +41,6 @@
     "lib"
   ],
   "scripts": {
-    "build": "cp LICENSE *.md dist",
-    "clean": "shx rm -rf .nyc_output coverage",
     "lint": "eslint .",
     "prettier": "prettier --list-different --write \"./**/**.{js,ts}\"",
     "test": "npm run test:node && npm run test:typescript && npm run test:browser && npm run lint",
