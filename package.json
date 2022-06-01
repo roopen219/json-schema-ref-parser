@@ -48,7 +48,7 @@
     "test:browser": "karma start --single-run",
     "test:typescript": "tsc --noEmit --strict --lib esnext,dom test/specs/typescript-definition.spec.ts",
     "coverage": "npm run coverage:node && npm run coverage:browser",
-    "coverage:node": "nyc node_modules/mocha/bin/mocha",
+    "coverage:node": "nyc mocha",
     "coverage:browser": "npm run test:browser -- --coverage"
   },
   "devDependencies": {
@@ -61,7 +61,7 @@
     "eslint": "^8.11.0",
     "karma": "^6.3.17",
     "karma-cli": "^2.0.0",
-    "mocha": "^9.2.2",
+    "mocha": "^10.0.0",
     "nyc": "^15.0.1",
     "prettier": "^2.6.0",
     "typescript": "^4.6.2"
