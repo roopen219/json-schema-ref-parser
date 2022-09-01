@@ -1,10 +1,12 @@
 const { expect } = require('chai');
+
 const $RefParser = require('../../..');
 const helper = require('../../utils/helper');
 const path = require('../../utils/path');
-const parsedSchema = require('./parsed');
-const dereferencedSchema = require('./dereferenced');
+
 const bundledSchema = require('./bundled');
+const dereferencedSchema = require('./dereferenced');
+const parsedSchema = require('./parsed');
 
 describe('Schema with $refs to parts of external files', function () {
   it('should parse successfully', async function () {

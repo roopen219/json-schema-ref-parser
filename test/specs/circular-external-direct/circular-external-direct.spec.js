@@ -1,8 +1,10 @@
 const { expect } = require('chai');
+
 const $RefParser = require('../../../lib');
 const path = require('../../utils/path');
-const parsedSchema = require('./parsed');
+
 const dereferencedSchema = require('./dereferenced');
+const parsedSchema = require('./parsed');
 
 describe('Schema with direct circular (recursive) external $refs', function () {
   it('should parse successfully', async function () {

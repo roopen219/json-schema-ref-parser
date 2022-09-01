@@ -1,5 +1,6 @@
 const chai = require('chai');
 const chaiSubset = require('chai-subset');
+
 const $RefParser = require('../../../lib');
 const { JSONParserErrorGroup, MissingPointerError } = require('../../../lib/util/errors');
 const helper = require('../../utils/helper');

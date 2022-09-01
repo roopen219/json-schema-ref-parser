@@ -1,9 +1,10 @@
 const chai = require('chai');
 const chaiSubset = require('chai-subset');
+
 const $RefParser = require('../../../lib');
+const { JSONParserErrorGroup, InvalidPointerError } = require('../../../lib/util/errors');
 const helper = require('../../utils/helper');
 const path = require('../../utils/path');
-const { JSONParserErrorGroup, InvalidPointerError } = require('../../../lib/util/errors');
 
 const { expect } = chai;
 chai.use(chaiSubset);

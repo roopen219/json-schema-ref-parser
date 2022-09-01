@@ -1,12 +1,15 @@
-const { expect } = require('chai');
 const nodePath = require('path');
+
+const { expect } = require('chai');
+
 const $RefParser = require('../../..');
-const path = require('../../utils/path');
-const helper = require('../../utils/helper');
 const url = require('../../../lib/util/url');
-const parsedSchema = require('./parsed');
-const dereferencedSchema = require('./dereferenced');
+const helper = require('../../utils/helper');
+const path = require('../../utils/path');
+
 const bundledSchema = require('./bundled');
+const dereferencedSchema = require('./dereferenced');
+const parsedSchema = require('./parsed');
 
 // Store the OS root directory
 const root = nodePath.resolve('/');

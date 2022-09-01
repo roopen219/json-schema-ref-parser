@@ -1,11 +1,13 @@
 const chai = require('chai');
 const chaiSubset = require('chai-subset');
+
 const $RefParser = require('../../..');
+const { JSONParserErrorGroup, ParserError, UnmatchedParserError } = require('../../../lib/util/errors');
 const helper = require('../../utils/helper');
 const path = require('../../utils/path');
-const parsedSchema = require('./parsed');
+
 const dereferencedSchema = require('./dereferenced');
-const { JSONParserErrorGroup, ParserError, UnmatchedParserError } = require('../../../lib/util/errors');
+const parsedSchema = require('./parsed');
 
 const { expect } = chai;
 chai.use(chaiSubset);

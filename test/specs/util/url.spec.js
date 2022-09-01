@@ -1,4 +1,5 @@
 const { expect } = require('chai');
+
 const $url = require('../../../lib/util/url');
 
 describe('Return the extension of a URL', function () {

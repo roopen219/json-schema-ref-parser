@@ -1,9 +1,11 @@
 const { expect } = require('chai');
+
 const $RefParser = require('../../../lib');
 const helper = require('../../utils/helper');
 const path = require('../../utils/path');
-const parsedSchema = require('./parsed');
+
 const dereferencedSchema = require('./dereferenced');
+const parsedSchema = require('./parsed');
 
 describe('Schema with OpenAPI 3.1 $ref description/schema overrides', function () {
   it('should parse successfully', async function () {

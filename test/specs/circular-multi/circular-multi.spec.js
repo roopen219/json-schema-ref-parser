@@ -1,6 +1,8 @@
 const { expect } = require('chai');
+
 const $RefParser = require('../../..');
 const path = require('../../utils/path');
+
 const bundledSchema = require('./bundled');
 
 describe('multiple circular $refs at the same depth in the schema', function () {

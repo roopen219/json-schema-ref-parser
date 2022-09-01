@@ -1,8 +1,9 @@
 const { expect } = require('chai');
+
 const $RefParser = require('../../lib');
+const { ParserError } = require('../../lib/util/errors');
 const helper = require('../utils/helper');
 const path = require('../utils/path');
-const { ParserError } = require('../../lib/util/errors');
 
 describe('Callback & Promise syntax', function () {
   for (const method of ['parse', 'resolve', 'dereference', 'bundle']) {

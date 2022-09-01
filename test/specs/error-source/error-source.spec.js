@@ -1,11 +1,12 @@
 /* eslint-disable mocha/no-setup-in-describe */
+const { host } = require('@jsdevtools/host-environment');
 const chai = require('chai');
 const chaiSubset = require('chai-subset');
+
 const $RefParser = require('../../..');
+const { InvalidPointerError, ResolverError, MissingPointerError } = require('../../../lib/util/errors');
 const helper = require('../../utils/helper');
 const path = require('../../utils/path');
-const { host } = require('@jsdevtools/host-environment');
-const { InvalidPointerError, ResolverError, MissingPointerError } = require('../../../lib/util/errors');
 
 const { expect } = chai;
 chai.use(chaiSubset);

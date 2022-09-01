@@ -1,12 +1,14 @@
 const { expect } = require('chai');
+
 const $RefParser = require('../../..');
 const helper = require('../../utils/helper');
 const path = require('../../utils/path');
-const internalRefsParsedSchema = require('../internal/parsed');
 const internalRefsDereferencedSchema = require('../internal/dereferenced');
-const parsedSchema = require('./parsed');
-const dereferencedSchema = require('./dereferenced');
+const internalRefsParsedSchema = require('../internal/parsed');
+
 const bundledSchema = require('./bundled');
+const dereferencedSchema = require('./dereferenced');
+const parsedSchema = require('./parsed');
 
 describe('Object sources (instead of file paths)', function () {
   it('should dereference a single object', async function () {

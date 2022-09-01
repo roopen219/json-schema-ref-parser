@@ -1,10 +1,12 @@
 const { host } = require('@jsdevtools/host-environment');
 const { expect } = require('chai');
+
 const $RefParser = require('../../..');
 const helper = require('../../utils/helper');
 const path = require('../../utils/path');
-const parsedSchema = require('./parsed');
+
 const dereferencedSchema = require('./dereferenced');
+const parsedSchema = require('./parsed');
 
 describe('Blank files', function () {
   let windowOnError;

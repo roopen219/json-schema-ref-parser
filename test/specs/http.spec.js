@@ -1,5 +1,6 @@
 const { host } = require('@jsdevtools/host-environment');
 const { expect } = require('chai');
+
 const $RefParser = require('../../lib');
 
 describe('HTTP options', function () {

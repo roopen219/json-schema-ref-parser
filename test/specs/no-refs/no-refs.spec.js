@@ -1,7 +1,9 @@
 const { expect } = require('chai');
+
 const $RefParser = require('../../..');
 const helper = require('../../utils/helper');
 const path = require('../../utils/path');
+
 const parsedSchema = require('./parsed');
 
 describe('Schema without any $refs', function () {

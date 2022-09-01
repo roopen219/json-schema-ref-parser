@@ -1,4 +1,5 @@
 const { expect } = require('chai');
+
 const $RefParser = require('../../../lib');
 const helper = require('../../utils/helper');
 const path = require('../../utils/path');

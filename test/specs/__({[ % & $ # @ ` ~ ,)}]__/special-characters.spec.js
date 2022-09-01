@@ -1,9 +1,11 @@
+const { expect } = require('chai');
+
 const $RefParser = require('../../..');
 const helper = require('../../utils/helper');
 const path = require('../../utils/path');
-const { expect } = require('chai');
-const parsedSchema = require('./parsed');
+
 const dereferencedSchema = require('./dereferenced');
+const parsedSchema = require('./parsed');
 
 describe('File names with special characters', function () {
   it('should parse successfully', async function () {

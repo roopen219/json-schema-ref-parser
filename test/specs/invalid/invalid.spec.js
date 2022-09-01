@@ -1,10 +1,11 @@
 const { host } = require('@jsdevtools/host-environment');
 const chai = require('chai');
 const chaiSubset = require('chai-subset');
+
 const $RefParser = require('../../../lib');
+const { JSONParserErrorGroup, ParserError, ResolverError } = require('../../../lib/util/errors');
 const helper = require('../../utils/helper');
 const path = require('../../utils/path');
-const { JSONParserErrorGroup, ParserError, ResolverError } = require('../../../lib/util/errors');
 
 const { expect } = chai;
 chai.use(chaiSubset);

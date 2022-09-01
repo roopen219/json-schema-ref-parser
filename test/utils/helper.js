@@ -1,7 +1,8 @@
 /* eslint-disable no-param-reassign */
-const $RefParser = require('../../lib');
 const { host } = require('@jsdevtools/host-environment');
 const { expect } = require('chai');
+
+const $RefParser = require('../../lib');
 
 const helper = {
   /**

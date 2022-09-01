@@ -1,11 +1,13 @@
 const { host } = require('@jsdevtools/host-environment');
 const { expect } = require('chai');
+
 const $RefParser = require('../../lib');
 const helper = require('../utils/helper');
 const path = require('../utils/path');
-const parsedSchema = require('./external/parsed');
-const dereferencedSchema = require('./external/dereferenced');
+
 const bundledSchema = require('./external/bundled');
+const dereferencedSchema = require('./external/dereferenced');
+const parsedSchema = require('./external/parsed');
 
 describe('$Refs object', function () {
   describe('paths', function () {
