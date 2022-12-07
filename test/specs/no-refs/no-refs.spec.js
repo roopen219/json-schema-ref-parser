@@ -25,8 +25,10 @@ describe('Schema without any $refs', function () {
     const schema = await parser.dereference(path.rel('specs/no-refs/no-refs.yaml'));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(parsedSchema);
+
     // The "circular" flag should NOT be set
     expect(parser.$refs.circular).to.equal(false);
+    expect(parser.$refs.circularRefs).to.have.length(0);
   });
 
   it('should bundle successfully', async function () {

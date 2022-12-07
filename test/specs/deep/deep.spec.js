@@ -35,6 +35,7 @@ describe('Schema with deeply-nested $refs', function () {
     const schema = await parser.dereference(path.rel('specs/deep/deep.yaml'));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(dereferencedSchema);
+
     // Reference equality
     expect(schema.properties.name.type)
       .to.equal(schema.properties['level 1'].properties.name.type)
@@ -44,8 +45,10 @@ describe('Schema with deeply-nested $refs', function () {
         schema.properties['level 1'].properties['level 2'].properties['level 3'].properties['level 4'].properties.name
           .type
       );
+
     // The "circular" flag should NOT be set
     expect(parser.$refs.circular).to.equal(false);
+    expect(parser.$refs.circularRefs).to.have.length(0);
   });
 
   it('should bundle successfully', async function () {

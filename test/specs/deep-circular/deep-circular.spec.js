@@ -15,9 +15,11 @@ describe('Schema with deeply-nested circular $refs', function () {
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(parsedSchema.schema);
     expect(parser.$refs.paths()).to.deep.equal([path.abs('specs/deep-circular/deep-circular.yaml')]);
+
     // The "circular" flag should NOT be set
     // (it only gets set by `dereference`)
     expect(parser.$refs.circular).to.equal(false);
+    expect(parser.$refs.circularRefs).to.have.length(0);
   });
 
   it(
@@ -38,8 +40,14 @@ describe('Schema with deeply-nested circular $refs', function () {
     const schema = await parser.dereference(path.rel('specs/deep-circular/deep-circular.yaml'));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(dereferencedSchema);
+
     // The "circular" flag should be set
     expect(parser.$refs.circular).to.equal(true);
+    expect(parser.$refs.circularRefs).to.have.length(1);
+    expect(parser.$refs.circularRefs[0]).to.contain(
+      '#/properties/level1/properties/level2/properties/level3/properties/level4/properties/level5/properties/level6/properties/level7/properties/level8/properties/level9/properties/level10/properties/level11/properties/level12/properties/level13/properties/level14/properties/level15/properties/level16/properties/level17/properties/level18/properties/level19/properties/level20/properties/level21/properties/level22/properties/level23/properties/level24/properties/level25/properties/level26/properties/level27/properties/level28/properties/level29/properties/level30'
+    );
+
     // Reference equality
     expect(schema.definitions.name)
       .to.equal(schema.properties.name)
@@ -73,6 +81,10 @@ describe('Schema with deeply-nested circular $refs', function () {
 
       // $Refs.circular should be true
       expect(parser.$refs.circular).to.equal(true);
+      expect(parser.$refs.circularRefs).to.have.length(1);
+      expect(parser.$refs.circularRefs[0]).to.contain(
+        '#/properties/level1/properties/level2/properties/level3/properties/level4/properties/level5/properties/level6/properties/level7/properties/level8/properties/level9/properties/level10/properties/level11/properties/level12/properties/level13/properties/level14/properties/level15/properties/level16/properties/level17/properties/level18/properties/level19/properties/level20/properties/level21/properties/level22/properties/level23/properties/level24/properties/level25/properties/level26/properties/level27/properties/level28/properties/level29/properties/level30'
+      );
     }
   });
 
@@ -81,8 +93,10 @@ describe('Schema with deeply-nested circular $refs', function () {
     const schema = await parser.bundle(path.rel('specs/deep-circular/deep-circular.yaml'));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(bundledSchema);
+
     // The "circular" flag should NOT be set
     // (it only gets set by `dereference`)
     expect(parser.$refs.circular).to.equal(false);
+    expect(parser.$refs.circularRefs).to.have.length(0);
   });
 });

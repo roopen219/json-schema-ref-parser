@@ -155,6 +155,7 @@ describe('Invalid syntax', function () {
               name: ParserError.name,
               message: message =>
                 message.includes('invalid.json: Unexpected end of JSON input') ||
+                message.includes("Expected property name or '}'") ||
                 message.includes('invalid.json: JSON.parse: end of data while reading object contents') || // Firefox
                 message.includes("invalid.json: JSON Parse error: Expected '}'") || // Safari
                 message.includes('invalid.json: JSON.parse Error: Invalid character') || // Edge
@@ -318,6 +319,7 @@ describe('Invalid syntax', function () {
               name: ParserError.name,
               message: message =>
                 message.includes('invalid.json: Unexpected end of JSON input') ||
+                message.includes("Expected property name or '}'") ||
                 message.includes('invalid.json: JSON.parse: end of data while reading object contents') || // Firefox
                 message.includes("invalid.json: JSON Parse error: Expected '}'") || // Safari
                 message.includes('invalid.json: JSON.parse Error: Invalid character') || // Edge

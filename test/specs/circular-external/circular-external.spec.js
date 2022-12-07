@@ -15,9 +15,11 @@ describe('Schema with circular (recursive) external $refs', function () {
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(parsedSchema.schema);
     expect(parser.$refs.paths()).to.deep.equal([path.abs('specs/circular-external/circular-external.yaml')]);
+
     // The "circular" flag should NOT be set
     // (it only gets set by `dereference`)
     expect(parser.$refs.circular).to.equal(false);
+    expect(parser.$refs.circularRefs).to.have.length(0);
   });
 
   it(
@@ -42,8 +44,14 @@ describe('Schema with circular (recursive) external $refs', function () {
     const schema = await parser.dereference(path.rel('specs/circular-external/circular-external.yaml'));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(dereferencedSchema);
+
     // The "circular" flag should be set
     expect(parser.$refs.circular).to.equal(true);
+    expect(parser.$refs.circularRefs).to.have.length(3);
+    expect(parser.$refs.circularRefs[0]).to.contain('#/definitions/thing');
+    expect(parser.$refs.circularRefs[1]).to.contain('#/properties/spouse');
+    expect(parser.$refs.circularRefs[2]).to.contain('#/properties/parents/items');
+
     // Reference equality
     expect(schema.definitions.person.properties.spouse).to.equal(schema.definitions.person);
     expect(schema.definitions.parent.properties.children.items).to.equal(schema.definitions.child);
@@ -66,6 +74,8 @@ describe('Schema with circular (recursive) external $refs', function () {
 
       // $Refs.circular should be true
       expect(parser.$refs.circular).to.equal(true);
+      expect(parser.$refs.circularRefs).to.have.length(1);
+      expect(parser.$refs.circularRefs[0]).to.contain('#/definitions/thing');
     }
   });
 
@@ -74,8 +84,10 @@ describe('Schema with circular (recursive) external $refs', function () {
     const schema = await parser.bundle(path.rel('specs/circular-external/circular-external.yaml'));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(bundledSchema);
+
     // The "circular" flag should NOT be set
     // (it only gets set by `dereference`)
     expect(parser.$refs.circular).to.equal(false);
+    expect(parser.$refs.circularRefs).to.have.length(0);
   });
 });

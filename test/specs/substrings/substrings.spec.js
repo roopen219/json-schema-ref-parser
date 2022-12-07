@@ -35,12 +35,15 @@ describe('$refs that are substrings of each other', function () {
     const schema = await parser.dereference(path.rel('specs/substrings/substrings.yaml'));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(dereferencedSchema);
+
     // Reference equality
     expect(schema.properties.firstName).to.equal(schema.definitions.name);
     expect(schema.properties.middleName).to.equal(schema.definitions['name-with-min-length']);
     expect(schema.properties.lastName).to.equal(schema.definitions['name-with-min-length-max-length']);
+
     // The "circular" flag should NOT be set
     expect(parser.$refs.circular).to.equal(false);
+    expect(parser.$refs.circularRefs).to.have.length(0);
   });
 
   it('should bundle successfully', async function () {

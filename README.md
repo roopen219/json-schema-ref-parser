@@ -97,6 +97,7 @@ import $RefParser from "@readme/json-schema-ref-parser";
 
 * Forces YAML to conform to JSON-compatible types. https://github.com/APIDevTools/json-schema-ref-parser/pull/247
 * Improved support for OpenAPI 3.1 definitions where `$ref` pointers may live alongside a `description` property. https://github.com/readmeio/json-schema-ref-parser/pull/2
+* Exposes a new `$refs.circularRefs` property containing an array of any circular `$ref` pointers that may exist within the schema definition.
 
 ## Browser support
 JSON Schema $Ref Parser supports recent versions of every major web browser.  Older browsers may require [Babel](https://babeljs.io/) and/or [polyfills](https://babeljs.io/docs/en/next/babel-polyfill).

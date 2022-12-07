@@ -15,9 +15,11 @@ describe('Schema with circular (recursive) $refs', function () {
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(parsedSchema.self);
       expect(parser.$refs.paths()).to.deep.equal([path.abs('specs/circular/circular-self.yaml')]);
+
       // The "circular" flag should NOT be set
       // (it only gets set by `dereference`)
       expect(parser.$refs.circular).to.equal(false);
+      expect(parser.$refs.circularRefs).to.have.length(0);
     });
 
     it(
@@ -34,8 +36,12 @@ describe('Schema with circular (recursive) $refs', function () {
       const schema = await parser.dereference(path.rel('specs/circular/circular-self.yaml'));
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(dereferencedSchema.self);
+
       // The "circular" flag should be set
       expect(parser.$refs.circular).to.equal(true);
+      expect(parser.$refs.circularRefs).to.have.length(1);
+      expect(parser.$refs.circularRefs[0]).to.contain('#/definitions/thing');
+
       // Reference equality
       expect(schema.definitions.child.properties.pet).to.equal(schema.definitions.pet);
     });
@@ -46,8 +52,12 @@ describe('Schema with circular (recursive) $refs', function () {
       const schema = await parser.dereference(firstPassSchema);
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(dereferencedSchema.self);
+
       // The "circular" flag should be set
       expect(parser.$refs.circular).to.equal(true);
+      expect(parser.$refs.circularRefs).to.have.length(1);
+      expect(parser.$refs.circularRefs[0]).to.contain('#/definitions/thing');
+
       // Reference equality
       expect(schema.definitions.child.properties.pet).to.equal(schema.definitions.pet);
     });
@@ -59,8 +69,11 @@ describe('Schema with circular (recursive) $refs', function () {
       });
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(dereferencedSchema.self);
+
       // The "circular" flag should be set
       expect(parser.$refs.circular).to.equal(true);
+      expect(parser.$refs.circularRefs).to.have.length(1);
+      expect(parser.$refs.circularRefs[0]).to.contain('#/definitions/thing');
     });
 
     it('should throw an error if "options.$refs.circular" is false', async function () {
@@ -77,6 +90,8 @@ describe('Schema with circular (recursive) $refs', function () {
 
         // $Refs.circular should be true
         expect(parser.$refs.circular).to.equal(true);
+        expect(parser.$refs.circularRefs).to.have.length(1);
+        expect(parser.$refs.circularRefs[0]).to.contain('#/definitions/thing');
       }
     });
 
@@ -85,9 +100,11 @@ describe('Schema with circular (recursive) $refs', function () {
       const schema = await parser.bundle(path.rel('specs/circular/circular-self.yaml'));
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(parsedSchema.self);
+
       // The "circular" flag should NOT be set
       // (it only gets set by `dereference`)
       expect(parser.$refs.circular).to.equal(false);
+      expect(parser.$refs.circularRefs).to.have.length(0);
     });
   });
 
@@ -98,9 +115,11 @@ describe('Schema with circular (recursive) $refs', function () {
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(parsedSchema.ancestor);
       expect(parser.$refs.paths()).to.deep.equal([path.abs('specs/circular/circular-ancestor.yaml')]);
+
       // The "circular" flag should NOT be set
       // (it only gets set by `dereference`)
       expect(parser.$refs.circular).to.equal(false);
+      expect(parser.$refs.circularRefs).to.have.length(0);
     });
 
     it(
@@ -117,8 +136,12 @@ describe('Schema with circular (recursive) $refs', function () {
       const schema = await parser.dereference(path.rel('specs/circular/circular-ancestor.yaml'));
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(dereferencedSchema.ancestor.fullyDereferenced);
+
       // The "circular" flag should be set
       expect(parser.$refs.circular).to.equal(true);
+      expect(parser.$refs.circularRefs).to.have.length(1);
+      expect(parser.$refs.circularRefs[0]).to.contain('#/definitions/person/properties/spouse');
+
       // Reference equality
       expect(schema.definitions.person.properties.spouse).to.equal(schema.definitions.person);
       expect(schema.definitions.person.properties.pet).to.equal(schema.definitions.pet);
@@ -130,8 +153,12 @@ describe('Schema with circular (recursive) $refs', function () {
       const schema = await parser.dereference(firstPassSchema);
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(dereferencedSchema.ancestor.fullyDereferenced);
+
       // The "circular" flag should be set
       expect(parser.$refs.circular).to.equal(true);
+      expect(parser.$refs.circularRefs).to.have.length(1);
+      expect(parser.$refs.circularRefs[0]).to.contain('#/definitions/person/properties/spouse');
+
       // Reference equality
       expect(schema.definitions.person.properties.spouse).to.equal(schema.definitions.person);
       expect(schema.definitions.person.properties.pet).to.equal(schema.definitions.pet);
@@ -144,8 +171,12 @@ describe('Schema with circular (recursive) $refs', function () {
       });
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(dereferencedSchema.ancestor.ignoreCircular$Refs);
+
       // The "circular" flag should be set
       expect(parser.$refs.circular).to.equal(true);
+      expect(parser.$refs.circularRefs).to.have.length(1);
+      expect(parser.$refs.circularRefs[0]).to.contain('#/definitions/person/properties/spouse');
+
       // Reference equality
       expect(schema.definitions.person.properties.pet).to.equal(schema.definitions.pet);
     });
@@ -166,6 +197,8 @@ describe('Schema with circular (recursive) $refs', function () {
 
         // $Refs.circular should be true
         expect(parser.$refs.circular).to.equal(true);
+        expect(parser.$refs.circularRefs).to.have.length(1);
+        expect(parser.$refs.circularRefs[0]).to.contain('#/definitions/person/properties/spouse');
       }
     });
 
@@ -174,9 +207,11 @@ describe('Schema with circular (recursive) $refs', function () {
       const schema = await parser.bundle(path.rel('specs/circular/circular-ancestor.yaml'));
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(parsedSchema.ancestor);
+
       // The "circular" flag should NOT be set
       // (it only gets set by `dereference`)
       expect(parser.$refs.circular).to.equal(false);
+      expect(parser.$refs.circularRefs).to.have.length(0);
     });
   });
 
@@ -187,9 +222,11 @@ describe('Schema with circular (recursive) $refs', function () {
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(parsedSchema.indirect);
       expect(parser.$refs.paths()).to.deep.equal([path.abs('specs/circular/circular-indirect.yaml')]);
+
       // The "circular" flag should NOT be set
       // (it only gets set by `dereference`)
       expect(parser.$refs.circular).to.equal(false);
+      expect(parser.$refs.circularRefs).to.have.length(0);
     });
 
     it(
@@ -206,8 +243,12 @@ describe('Schema with circular (recursive) $refs', function () {
       const schema = await parser.dereference(path.rel('specs/circular/circular-indirect.yaml'));
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(dereferencedSchema.indirect.fullyDereferenced);
+
       // The "circular" flag should be set
       expect(parser.$refs.circular).to.equal(true);
+      expect(parser.$refs.circularRefs).to.have.length(1);
+      expect(parser.$refs.circularRefs[0]).to.contain('#/definitions/child/properties/parents/items');
+
       // Reference equality
       expect(schema.definitions.parent.properties.children.items).to.equal(schema.definitions.child);
       expect(schema.definitions.child.properties.parents.items).to.equal(schema.definitions.parent);
@@ -219,8 +260,14 @@ describe('Schema with circular (recursive) $refs', function () {
       const schema = await parser.dereference(firstPassSchema);
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(dereferencedSchema.indirect.fullyDereferenced);
+
       // The "circular" flag should be set
       expect(parser.$refs.circular).to.equal(true);
+      expect(parser.$refs.circularRefs).to.have.length(1);
+      expect(parser.$refs.circularRefs[0]).to.contain(
+        '#/definitions/parent/properties/children/items/properties/parents/items'
+      );
+
       // Reference equality
       expect(schema.definitions.parent.properties.children.items).to.equal(schema.definitions.child);
       expect(schema.definitions.child.properties.parents.items).to.equal(schema.definitions.parent);
@@ -233,8 +280,12 @@ describe('Schema with circular (recursive) $refs', function () {
       });
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(dereferencedSchema.indirect.ignoreCircular$Refs);
+
       // The "circular" flag should be set
       expect(parser.$refs.circular).to.equal(true);
+      expect(parser.$refs.circularRefs).to.have.length(1);
+      expect(parser.$refs.circularRefs[0]).to.contain('#/definitions/child/properties/parents/items');
+
       // Reference equality
       expect(schema.definitions.child.properties.pet).to.equal(schema.definitions.pet);
     });
@@ -257,6 +308,8 @@ describe('Schema with circular (recursive) $refs', function () {
 
         // $Refs.circular should be true
         expect(parser.$refs.circular).to.equal(true);
+        expect(parser.$refs.circularRefs).to.have.length(1);
+        expect(parser.$refs.circularRefs[0]).to.contain('#/definitions/child/properties/parents/items');
       }
     });
 
@@ -265,9 +318,11 @@ describe('Schema with circular (recursive) $refs', function () {
       const schema = await parser.bundle(path.rel('specs/circular/circular-indirect.yaml'));
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(parsedSchema.indirect);
+
       // The "circular" flag should NOT be set
       // (it only gets set by `dereference`)
       expect(parser.$refs.circular).to.equal(false);
+      expect(parser.$refs.circularRefs).to.have.length(0);
     });
   });
 
@@ -278,9 +333,11 @@ describe('Schema with circular (recursive) $refs', function () {
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(parsedSchema.indirectAncestor);
       expect(parser.$refs.paths()).to.deep.equal([path.abs('specs/circular/circular-indirect-ancestor.yaml')]);
+
       // The "circular" flag should NOT be set
       // (it only gets set by `dereference`)
       expect(parser.$refs.circular).to.equal(false);
+      expect(parser.$refs.circularRefs).to.have.length(0);
     });
 
     it(
@@ -297,8 +354,12 @@ describe('Schema with circular (recursive) $refs', function () {
       const schema = await parser.dereference(path.rel('specs/circular/circular-indirect-ancestor.yaml'));
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(dereferencedSchema.indirectAncestor.fullyDereferenced);
+
       // The "circular" flag should be set
       expect(parser.$refs.circular).to.equal(true);
+      expect(parser.$refs.circularRefs).to.have.length(1);
+      expect(parser.$refs.circularRefs[0]).to.contain('#/definitions/child/properties/children/items');
+
       // Reference equality
       expect(schema.definitions.parent.properties.child).to.equal(schema.definitions.child);
       expect(schema.definitions.child.properties.children.items).to.equal(schema.definitions.child);
@@ -310,8 +371,14 @@ describe('Schema with circular (recursive) $refs', function () {
       const schema = await parser.dereference(firstPassSchema);
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(dereferencedSchema.indirectAncestor.fullyDereferenced);
+
       // The "circular" flag should be set
       expect(parser.$refs.circular).to.equal(true);
+      expect(parser.$refs.circularRefs).to.have.length(1);
+      expect(parser.$refs.circularRefs[0]).to.contain(
+        '#/definitions/parent/properties/child/properties/children/items'
+      );
+
       // Reference equality
       expect(schema.definitions.parent.properties.child).to.equal(schema.definitions.child);
       expect(schema.definitions.child.properties.children.items).to.equal(schema.definitions.child);
@@ -324,8 +391,12 @@ describe('Schema with circular (recursive) $refs', function () {
       });
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(dereferencedSchema.indirectAncestor.ignoreCircular$Refs);
+
       // The "circular" flag should be set
       expect(parser.$refs.circular).to.equal(true);
+      expect(parser.$refs.circularRefs).to.have.length(1);
+      expect(parser.$refs.circularRefs[0]).to.contain('#/definitions/child/properties/children/items');
+
       // Reference equality
       expect(schema.definitions.child.properties.pet).to.equal(schema.definitions.pet);
     });
@@ -346,6 +417,8 @@ describe('Schema with circular (recursive) $refs', function () {
 
         // $Refs.circular should be true
         expect(parser.$refs.circular).to.equal(true);
+        expect(parser.$refs.circularRefs).to.have.length(1);
+        expect(parser.$refs.circularRefs[0]).to.contain('#/definitions/child/properties/children/items');
       }
     });
 
@@ -354,9 +427,11 @@ describe('Schema with circular (recursive) $refs', function () {
       const schema = await parser.bundle(path.rel('specs/circular/circular-indirect-ancestor.yaml'));
       expect(schema).to.equal(parser.schema);
       expect(schema).to.deep.equal(parsedSchema.indirectAncestor);
+
       // The "circular" flag should NOT be set
       // (it only gets set by `dereference`)
       expect(parser.$refs.circular).to.equal(false);
+      expect(parser.$refs.circularRefs).to.have.length(0);
     });
   });
 });

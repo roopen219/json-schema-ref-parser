@@ -362,6 +362,11 @@ declare namespace $RefParser {
     public circular: boolean;
 
     /**
+     * This property contains any circular references that may be within the schema.
+     */
+    public circularRefs: string[];
+
+    /**
      * Returns the paths/URLs of all the files in your schema (including the main schema file).
      *
      * See https://apitools.dev/json-schema-ref-parser/docs/refs.html#pathstypes

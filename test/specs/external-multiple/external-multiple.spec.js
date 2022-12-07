@@ -33,10 +33,13 @@ describe('Schema with multiple external $refs to different parts of a file', fun
     const schema = await parser.dereference(path.rel('specs/external-multiple/external-multiple.yaml'));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(dereferencedSchema);
+
     // Reference equality
     expect(schema.properties.user.example).to.equal(schema.example.user);
+
     // The "circular" flag should NOT be set
     expect(parser.$refs.circular).to.equal(false);
+    expect(parser.$refs.circularRefs).to.have.length(0);
   });
 
   it('should bundle successfully', async function () {

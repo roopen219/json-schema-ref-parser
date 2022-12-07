@@ -8,6 +8,7 @@ This object is a map of JSON References and their resolved values.  It also has 
 
 ##### Properties
 - [`circular`](#circular)
+- [`circularRefs`](#circularRefs)
 
 ##### Methods
 - [`paths()`](#pathstypes)
@@ -29,6 +30,22 @@ await parser.dereference("my-schema.json");
 
 if (parser.$refs.circular) {
   console.log('The schema contains circular references');
+}
+```
+
+
+### `circularRefs`
+
+- **Type:** `array`
+
+This property contains an array of any [circular references](README.md#circular-refs) that may the schema contains.
+
+```javascript
+let parser = new $RefParser();
+await parser.dereference("my-schema.json");
+
+if (parser.$refs.circular) {
+  console.log(parser.$refs.circularRefs);
 }
 ```
 

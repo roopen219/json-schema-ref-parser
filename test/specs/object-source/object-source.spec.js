@@ -43,6 +43,7 @@ describe('Object sources (instead of file paths)', function () {
     ];
     expect(parser.$refs.paths()).to.have.same.members(expectedPaths);
     expect(parser.$refs.values()).to.have.keys(expectedPaths);
+
     // Reference equality
     expect(schema.properties.name).to.equal(schema.definitions.name);
     expect(schema.definitions.requiredString)
@@ -50,8 +51,10 @@ describe('Object sources (instead of file paths)', function () {
       .to.equal(schema.definitions.name.properties.last)
       .to.equal(schema.properties.name.properties.first)
       .to.equal(schema.properties.name.properties.last);
+
     // The "circular" flag should NOT be set
     expect(parser.$refs.circular).to.equal(false);
+    expect(parser.$refs.circularRefs).to.have.length(0);
   });
 
   it('should bundle an object that references external files', async function () {

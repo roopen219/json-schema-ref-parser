@@ -37,10 +37,13 @@ describe('Schema with a top-level (root) $ref', function () {
     const schema = await parser.dereference(path.rel('specs/root/root.yaml'));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(dereferencedSchema);
+
     // Reference equality
     expect(schema.properties.first).to.equal(schema.properties.last);
+
     // The "circular" flag should NOT be set
     expect(parser.$refs.circular).to.equal(false);
+    expect(parser.$refs.circularRefs).to.have.length(0);
   });
 
   it('should bundle successfully', async function () {

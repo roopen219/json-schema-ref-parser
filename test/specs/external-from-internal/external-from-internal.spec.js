@@ -75,6 +75,7 @@ describe('Schema with two external refs to the same value and internal ref befor
     const schema = await parser.dereference(path.rel('specs/external-from-internal/external-from-internal.yaml'));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(dereferencedSchema);
+
     // Reference equality
     expect(schema.internal1).to.equal(schema.internal2);
     expect(schema.internal2).to.equal(schema.external1);
@@ -86,8 +87,10 @@ describe('Schema with two external refs to the same value and internal ref befor
       .to.equal(schema.internal4.test)
       .to.equal(schema.external1.test)
       .to.equal(schema.external2.test);
+
     // The "circular" flag should NOT be set
     expect(parser.$refs.circular).to.equal(false);
+    expect(parser.$refs.circularRefs).to.have.length(0);
   });
 
   it('should bundle successfully', async function () {

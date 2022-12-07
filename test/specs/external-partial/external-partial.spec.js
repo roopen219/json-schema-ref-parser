@@ -37,10 +37,13 @@ describe('Schema with $refs to parts of external files', function () {
     const schema = await parser.dereference(path.rel('specs/external-partial/external-partial.yaml'));
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(dereferencedSchema);
+
     // Reference equality
     expect(schema.properties.name.properties.first).to.equal(schema.properties.name.properties.last);
+
     // The "circular" flag should NOT be set
     expect(parser.$refs.circular).to.equal(false);
+    expect(parser.$refs.circularRefs).to.have.length(0);
   });
 
   it('should bundle successfully', async function () {

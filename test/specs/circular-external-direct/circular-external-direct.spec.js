@@ -15,9 +15,11 @@ describe('Schema with direct circular (recursive) external $refs', function () {
     expect(parser.$refs.paths()).to.deep.equal([
       path.abs('specs/circular-external-direct/circular-external-direct-root.yaml'),
     ]);
+
     // The "circular" flag should NOT be set
     // (it only gets set by `dereference`)
     expect(parser.$refs.circular).to.equal(false);
+    expect(parser.$refs.circularRefs).to.have.length(0);
   });
 
   it('should dereference successfully', async function () {
@@ -27,7 +29,10 @@ describe('Schema with direct circular (recursive) external $refs', function () {
     );
     expect(schema).to.equal(parser.schema);
     expect(schema).to.deep.equal(dereferencedSchema);
+
     // The "circular" flag should be set
     expect(parser.$refs.circular).to.equal(true);
+    expect(parser.$refs.circularRefs).to.have.length(1);
+    expect(parser.$refs.circularRefs[0]).to.contain('#/foo/foo');
   });
 });

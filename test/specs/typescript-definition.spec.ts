@@ -16,6 +16,7 @@ let parser = new $RefParser();
 
 // $RefParser instance properties
 assert(parser.$refs.circular === true);
+assert(Array.isArray(parser.$refs.circularRefs));
 assert(parser.schema.type === "object");
 
 

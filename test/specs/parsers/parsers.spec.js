@@ -45,8 +45,10 @@ describe('References to non-JSON files', function () {
     expect(schema).to.equal(parser.schema);
     schema.definitions.binary = helper.convertNodeBuffersToPOJOs(schema.definitions.binary);
     expect(schema).to.deep.equal(dereferencedSchema.defaultParsers);
+
     // The "circular" flag should NOT be set
     expect(parser.$refs.circular).to.equal(false);
+    expect(parser.$refs.circularRefs).to.have.length(0);
   });
 
   it('should bundle successfully', async function () {
