@@ -40,6 +40,9 @@
   "files": [
     "lib"
   ],
+  "engines": {
+    "node": ">=16"
+  },
   "scripts": {
     "coverage": "npm run coverage:node && npm run coverage:browser",
     "coverage:browser": "npm run test:browser -- --coverage",
