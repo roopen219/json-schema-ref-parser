@@ -133,7 +133,7 @@ function urlPathHelpers() {
      */
     cwd() {
       // eslint-disable-next-line no-restricted-globals
-      return location.href;
+      return 'https://example.com';
     },
   };
 
